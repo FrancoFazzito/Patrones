@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBE57655-77E5-4874-8013-F0D08EBFBF12}</ProjectGuid>
+    <ProjectGuid>{6BDCCF33-78ED-4D7F-9E39-9E6C21255B50}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>cadena_responsablidad</RootNamespace>
-    <AssemblyName>cadena responsablidad</AssemblyName>
+    <RootNamespace>CadenaResponsabilidad</RootNamespace>
+    <AssemblyName>CadenaResponsabilidad</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
