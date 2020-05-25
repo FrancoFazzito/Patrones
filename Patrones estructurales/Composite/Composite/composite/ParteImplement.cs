@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Composite
 {
-    abstract class ParteImplement<T> : IParte<T>, IPerfomance//Leaf
+    public abstract class ParteImplement<T> : IParte<T>, IPerfomance //Leaf
     {
         protected ParteImplement(string name, int id, double price, int level)
         {
@@ -26,5 +27,11 @@ namespace Composite
         public int Id { get; set; }
         public double Price { get; set; }
         public int PerfomanceLevel { get; set; }
+
+        class ExceptionInvalidEdit : Exception
+        {
+            public override string Message => "no se puede cambiar elementos de esta parte del equipo";
+        }
     }
+
 }

@@ -3,7 +3,7 @@
 namespace Composite //permite crear estructuras jerarquicas o de arbol
 {
 
-    class Specification
+    public class Specification
     {
         private Dictionary<string, int> perfomanceLevels;
         private const string CPU = "CPU";

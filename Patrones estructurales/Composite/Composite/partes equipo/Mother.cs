@@ -1,6 +1,6 @@
 ﻿namespace Composite
 {
-    class Mother<T> : ParteSocketImplement<T>
+    public class Mother<T> : ParteSocketImplement<T>
     {
         public Mother(string name, int id, double price, int level) : base(name, id, price, level)
         {

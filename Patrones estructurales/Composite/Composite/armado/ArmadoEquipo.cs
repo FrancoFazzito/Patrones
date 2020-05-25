@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Composite
 {
-    class ArmadoEquipo
+    public class ArmadoEquipo
     {
         private const string NO_VALID = "no valido";
         private Specification specification;
@@ -16,14 +16,14 @@ namespace Composite
             specification.SetUseType(use);
         }
 
-        public List<CPU<IPerfomance>> GetEquipo()
+        public List<CPU<IPerfomance>> GetEquipos()
         {
             List<CPU<IPerfomance>> equipos = new List<CPU<IPerfomance>>();
 
-            foreach (var cpu in Carga.GetCPUs().FindAll(c => c.PerfomanceLevel > specification.GetCPULevel()))
+            foreach (var cpu in GetCpusSpecification())
             {
-                double consumo = 0;
-                consumo += cpu.Consumo;
+                double consumoTotal = cpu.Consumo;
+
                 Mother<IPerfomance> mother = AddMother(cpu);
                 AddRAM(mother);
                 AddFan(mother);
@@ -35,21 +35,21 @@ namespace Composite
                 if (!cpu.HasIntegrada)
                 {
                     GPU<IPerfomance> gpu = AddGPU(mother);
-                    consumo += gpu.Consumo;
+                    consumoTotal += gpu.Consumo;
                     gpuinstalda = true;
                 }
 
                 if (specification.GetGPULevel() != 1 && !gpuinstalda)
                 {
                     GPU<IPerfomance> gpu = AddGPU(mother);
-                    consumo += gpu.Consumo;
+                    consumoTotal += gpu.Consumo;
                 }
 
-                AddFuente(consumo, mother);
+                AddFuente(consumoTotal, mother);
 
-                bool existeInvalido = mother.GetElements().Exists(e => e.Name == NO_VALID);
+                bool existeInvalido = ExistsParteInvalida(mother);
 
-                if (cpu.GetTotalPrice() < presupuesto && !existeInvalido)
+                if (GetEquiposPrecioIndicado(cpu, existeInvalido))
                 {
                     equipos.Add(cpu);
                 }
@@ -57,12 +57,27 @@ namespace Composite
             return equipos;
         }
 
+        private List<CPU<IPerfomance>> GetCpusSpecification()
+        {
+            return Carga.GetCPUs().FindAll(c => c.PerfomanceLevel > specification.GetCPULevel());
+        }
+
+        private static bool ExistsParteInvalida(Mother<IPerfomance> mother)
+        {
+            return mother.GetElements().Exists(e => e.Name == NO_VALID);
+        }
+
+        private bool GetEquiposPrecioIndicado(CPU<IPerfomance> cpu, bool existeInvalido)
+        {
+            return cpu.GetTotalPrice() <= presupuesto && !existeInvalido;
+        }
+
         private Mother<IPerfomance> AddMother(CPU<IPerfomance> cpu)
         {
             Mother<IPerfomance> mother = new Mother<IPerfomance>(NO_VALID, 0, 0, 0);
             foreach (var mot in Carga.GetMothers())
             {
-                if (mot.Socket == cpu.Socket && mot.PerfomanceLevel >= specification.GetMotherLevel())
+                if (ValidateMother(cpu, mot))
                 {
                     mother = mot;
                 }
@@ -71,12 +86,17 @@ namespace Composite
             return mother;
         }
 
+        private bool ValidateMother(CPU<IPerfomance> cpu, Mother<IPerfomance> mot)
+        {
+            return mot.Socket == cpu.Socket && mot.PerfomanceLevel >= specification.GetMotherLevel();
+        }
+
         private void AddDisco(Mother<IPerfomance> mother)
         {
             var disco = new Disco<IPerfomance>(NO_VALID, 0, 0, 0);
             foreach (var item in Carga.GetDiscos())
             {
-                if (item.Capacidad >= specification.GetDiscoCapacidad())
+                if (ValidateDisco(item))
                 {
                     disco = item;
                 }
@@ -84,9 +104,14 @@ namespace Composite
             mother.Add(disco);
         }
 
+        private bool ValidateDisco(Disco<IPerfomance> item)
+        {
+            return item.Capacidad >= specification.GetDiscoCapacidad();
+        }
+
         private void AddFuente(double consumo, Mother<IPerfomance> mother)
         {
-            var fuente = new Fuente<IPerfomance>(NO_VALID, 0, 0, 0); 
+            var fuente = new Fuente<IPerfomance>(NO_VALID, 0, 0, 0);
             foreach (var item in Carga.GetFuentes())
             {
                 if (item.Watts80 > consumo)
@@ -108,12 +133,17 @@ namespace Composite
             Fan<IPerfomance> fan = new Fan<IPerfomance>(NO_VALID, 0, 0, 0);
             foreach (var item in Carga.GetFans())
             {
-                if (item.Socket == mother.Socket && item.PerfomanceLevel >= specification.GetFanLevel())
+                if (ValidateFan(mother, item))
                 {
                     fan = item;
                 }
             }
             mother.Add(fan);
+        }
+
+        private bool ValidateFan(Mother<IPerfomance> mother, Fan<IPerfomance> item)
+        {
+            return item.Socket == mother.Socket && item.PerfomanceLevel >= specification.GetFanLevel();
         }
 
         private GPU<IPerfomance> AddGPU(Mother<IPerfomance> mother)
@@ -122,7 +152,7 @@ namespace Composite
 
             foreach (var item in Carga.GetGPUs())
             {
-                if (item.PerfomanceLevel >= specification.GetGPULevel())
+                if (ValidateFan(item))
                 {
                     gpu = item;
                 }
@@ -131,13 +161,18 @@ namespace Composite
             return gpu;
         }
 
+        private bool ValidateFan(GPU<IPerfomance> item)
+        {
+            return item.PerfomanceLevel >= specification.GetGPULevel();
+        }
+
         private void AddRAM(Mother<IPerfomance> mother)
         {
             RAM<IPerfomance> ram = new RAM<IPerfomance>(NO_VALID, 0, 0, 0);
             foreach (var item in Carga.GetRAMs())
             {
                 int capacidad = specification.GetCapacidadRam();
-                if (item.TipoMemoriaRAM == mother.TipoMemoriaRAM && item.Capacidad >= capacidad)
+                if (ValidateRAM(mother, item, capacidad))
                 {
                     ram = item;
                 }
@@ -146,6 +181,9 @@ namespace Composite
             mother.Add(ram);
         }
 
-
+        private static bool ValidateRAM(Mother<IPerfomance> mother, RAM<IPerfomance> item, int capacidad)
+        {
+            return item.TipoMemoriaRAM == mother.TipoMemoriaRAM && item.Capacidad >= capacidad;
+        }
     }
 }

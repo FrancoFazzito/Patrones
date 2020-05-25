@@ -1,6 +1,6 @@
 ﻿namespace Composite //permite crear estructuras jerarquicas o de arbol
 {
-    enum UseType
+    public enum UseType
     {
         gaming,
         diseño,

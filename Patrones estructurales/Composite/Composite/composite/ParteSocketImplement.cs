@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace Composite
 {
-    abstract class ParteSocketImplement<T> : IParte<T>, IPerfomance //Composite
+    public abstract class ParteSocketImplement<T> : IParte<T>, IPerfomance //Composite
     {
-        private List<IParte<T>> elementos;
+        private readonly List<IParte<T>> elementos;
         private List<IParte<T>> details;
 
         protected ParteSocketImplement(string name, int id, double price, int level)

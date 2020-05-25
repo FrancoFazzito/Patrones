@@ -1,6 +1,6 @@
 ﻿namespace Composite
 {
-    class Fan<T> : ParteImplement<T>
+    public class Fan<T> : ParteImplement<T>
     {
         public Fan(string name, int id, double price, int level) : base(name, id, price, level)
         {

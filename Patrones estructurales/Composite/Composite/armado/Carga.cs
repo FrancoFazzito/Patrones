@@ -2,7 +2,7 @@
 
 namespace Composite
 {
-    static class Carga
+    public static class Carga
     {
         private const string DDR4 = "DDR4";
         private const string DDR3 = "DDR3";

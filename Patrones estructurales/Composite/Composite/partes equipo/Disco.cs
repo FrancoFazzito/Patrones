@@ -1,6 +1,6 @@
 ﻿namespace Composite
 {
-    class Disco<T> : ParteImplement<T>
+    public class Disco<T> : ParteImplement<T>
     {
         public Disco(string name, int id, double price, int level) : base(name, id, price, level)
         {
