@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C5CA4895-6DB3-48B6-B254-2909EC4441E8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Composite</RootNamespace>
     <AssemblyName>Composite</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -20,7 +20,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,11 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Componente.cs" />
-    <Compile Include="Compuesto.cs" />
-    <Compile Include="IComponente.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="armado\ArmadoEquipo.cs" />
+    <Compile Include="partes equipo\Disco.cs" />
+    <Compile Include="partes equipo\CPU.cs" />
+    <Compile Include="partes equipo\Fan.cs" />
+    <Compile Include="partes equipo\Fuente.cs" />
+    <Compile Include="partes equipo\Gabinete.cs" />
+    <Compile Include="partes equipo\GPU.cs" />
+    <Compile Include="composite\IPerfomance.cs" />
+    <Compile Include="partes equipo\Mother.cs" />
+    <Compile Include="composite\ParteImplement.cs" />
+    <Compile Include="composite\ParteSocketImplement.cs" />
+    <Compile Include="composite\IParte.cs" />
+    <Compile Include="armado\Carga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="partes equipo\RAM.cs" />
+    <Compile Include="armado\Specification.cs" />
+    <Compile Include="armado\UseType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
