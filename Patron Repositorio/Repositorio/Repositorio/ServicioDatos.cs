@@ -14,7 +14,7 @@ namespace Repositorio
 
         public ServicioDatos()
         {
-            dataAdapter = new SqlDataAdapter(GetSelect(), Conexion.StringConexion);
+            dataAdapter = new SqlDataAdapter(GetSelect(), Conexion.SqlConexion);
             commandBuilder = new SqlCommandBuilder(dataAdapter);
             dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
             dataAdapter.DeleteCommand = commandBuilder.GetDeleteCommand();
@@ -26,7 +26,8 @@ namespace Repositorio
         public void Actualizar(T entidad)
         {
             var table = GetDataTableFill();
-            ConvertListToTable.GetDataRowId(entidad.Id, table).ItemArray = ConvertListToTable.GetObjectValues(entidad);
+            var row = GetRow(entidad.Id, table); 
+            row.ItemArray = GetValues(entidad);
             Save(table);
         }
 
@@ -34,9 +35,16 @@ namespace Repositorio
         {
             List<T> items = GetAll();
             var table = ConvertListToTable.ToDataTable(items);
-            var values = ConvertListToTable.GetObjectValues(entidad);
+            var values = GetValues(entidad);
             table.Rows.Add(values);
             Save(table);
+
+            
+        }
+
+        private object[] GetValues(T entidad)
+        {
+            return ConvertListToTable.GetObjectValues(entidad);
         }
 
         public List<T> Buscar(Func<T, bool> where)
@@ -52,8 +60,14 @@ namespace Repositorio
         public void Eliminar(int id)
         {
             var table = GetDataTableFill();
-            ConvertListToTable.GetDataRowId(id,table).Delete();
+            var row = GetRow(id, table);
+            row.Delete();
             Save(table);
+        }
+
+        private DataRow GetRow(int id, DataTable table)
+        {
+            return ConvertListToTable.GetDataRowId(id, table);
         }
 
         public List<T> GetAll()

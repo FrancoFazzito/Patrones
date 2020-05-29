@@ -2,8 +2,16 @@
 
 namespace Repositorio
 {
-    public static class Conexion
+    public sealed class Conexion
     {
-        public static SqlConnection StringConexion => new SqlConnection("Data Source=.;Initial Catalog=Persona;Integrated Security=True");
+        private const string STRING_CONEXION = "Data Source=.;Initial Catalog=Persona;Integrated Security=True";
+        private static readonly SqlConnection conexion = new SqlConnection(STRING_CONEXION);
+
+        private Conexion()
+        {
+
+        }
+
+        public static SqlConnection SqlConexion => conexion;
     }
 }
