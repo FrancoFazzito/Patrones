@@ -11,6 +11,4 @@
         public double Consumo { get; set; }
         public bool HasIntegrada { get; set; }
     }
-
-
 }

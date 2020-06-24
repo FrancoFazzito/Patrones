@@ -6,7 +6,7 @@
         {
         }
 
-        public string TipoMemoriaRAM { get; set; }
+        public string TipoMemoria { get; set; }
         public int Capacidad { get; set; }
     }
 

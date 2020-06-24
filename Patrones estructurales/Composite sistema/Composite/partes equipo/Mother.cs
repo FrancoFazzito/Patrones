@@ -7,7 +7,7 @@
         }
 
         public string Socket { get; set; }
-        public string TipoMemoriaRAM { get; set; }
+        public string TipoMemoria { get; set; }
         public string Formato { get; internal set; }
     }
 

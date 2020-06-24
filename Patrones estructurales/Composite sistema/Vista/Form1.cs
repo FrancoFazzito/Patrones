@@ -35,7 +35,7 @@ namespace Vista
                 foreach (var equipo in equipos)
                 {
                     infoElemento.Append($"equipo " + i++ + "\r\n");
-                    foreach (var element in equipo.GetElements())
+                    foreach (IParte<IPerfomance> element in equipo.GetElements())
                     {
                         infoElemento.Append($"-{GetNameComponent(element)}-   " +
                                             $"{element.Name}    ${element.Price}" + "\r\n");

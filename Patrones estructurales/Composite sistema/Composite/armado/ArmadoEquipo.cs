@@ -183,7 +183,7 @@ namespace Composite
 
         private static bool ValidateRAM(Mother<IPerfomance> mother, RAM<IPerfomance> item, int capacidad)
         {
-            return item.TipoMemoriaRAM == mother.TipoMemoriaRAM && item.Capacidad >= capacidad;
+            return item.TipoMemoria == mother.TipoMemoria && item.Capacidad >= capacidad;
         }
     }
 }

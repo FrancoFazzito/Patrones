@@ -91,22 +91,22 @@ namespace Composite
             {
                 new RAM<IPerfomance>("corsair", 7, 8000, 4)
                 {
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Capacidad = 8
                 },
                 new RAM<IPerfomance>("corsair", 9, 4000, 4)
                 {
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Capacidad = 4
                 },
                 new RAM<IPerfomance>("crucial", 8, 2000, 2)
                 {
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Capacidad = 4
                 },
                 new RAM<IPerfomance>("ballistix", 8, 3000, 4)
                 {
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Capacidad = 8
                 }
             };
@@ -120,57 +120,57 @@ namespace Composite
                 new Mother<IPerfomance>("asus a", 10, 5000, 5)
                 {
                     Socket = AM4,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
 
                 new Mother<IPerfomance>("asus b", 11, 6000, 6)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ITX
                 },
 
                 new Mother<IPerfomance>("asus c", 12, 4000, 4)
                 {
                     Socket = INTEL_1051,
-                    TipoMemoriaRAM = DDR3,
+                    TipoMemoria = DDR3,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus a", 10, 3000, 3)
                 {
                     Socket = AM4,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus d", 10, 3000, 3)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus e", 10, 5500, 6)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus e", 10, 7000, 8)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus e", 10, 5000, 9)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 },
                 new Mother<IPerfomance>("asus e", 10, 3500, 3)
                 {
                     Socket = INTEL_1151,
-                    TipoMemoriaRAM = DDR4,
+                    TipoMemoria = DDR4,
                     Formato = ATX
                 }
             };

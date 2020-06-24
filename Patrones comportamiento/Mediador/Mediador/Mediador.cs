@@ -10,7 +10,6 @@ namespace Mediador
        
         public void Suscribir(Envio envio)  //adicion del metodo a invocar
         {
-
             envioMensaje += envio;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("-- suscrito --");
