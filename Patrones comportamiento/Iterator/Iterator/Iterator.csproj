@@ -4,12 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1396B5F4-A2D4-4872-827A-678E50AAB8C3}</ProjectGuid>
+    <ProjectGuid>{DD31464E-9E5C-47EF-8FC5-D48E2E8CE4F4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Iterator</RootNamespace>
     <AssemblyName>Iterator</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

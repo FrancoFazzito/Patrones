@@ -1,74 +1,109 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Iterator
 {
-    class Program //provee un mecanismo para acceder a los elementos de una coleccion de forma secuencial
+    class Program
     {
         static void Main(string[] args)
         {
-            Contenedor contenedor = new Contenedor();
+            int[] array = { 1, 2, 3, 4, 5, 6 };
+            
+            ICollection<int> aggregate = new CollectionConcreta<int>(array);
+            Iiterator<int> iterator = aggregate.iterator();
 
-            foreach (var valor in contenedor)
+            aggregate.Add(8);
+
+            while (iterator.HasNext())
             {
-                Console.WriteLine(valor);
+                Console.WriteLine(iterator.Current());
             }
 
             Console.Read();
         }
     }
 
-    class Contenedor : IEnumerable
+    public interface Iiterator<T>
     {
-        private int[] valores = new int[10];
+        bool HasNext();
+        T Current();
+        T First();
+    }
 
-        public Contenedor()
+    public interface ICollection<T>
+    {
+        List<T> elements { get; set; }
+        Iiterator<T> iterator();
+        void Add(T value);
+        int Count();
+    }
+
+    public class CollectionConcreta<T> : ICollection<T>
+    {
+        public List<T> elements { get; set; }
+
+        public CollectionConcreta(IEnumerable<T> elements)
         {
-            for (int i = 0; i < valores.Length; i++)
-            {
-                valores[i] = i * i;
-            }
+            this.elements = elements.ToList();
         }
 
-        public IEnumerator GetEnumerator()
+        public CollectionConcreta()
         {
-            return new ContenedorEnum(valores);
+            this.elements = new List<T>();
+        }
+
+        public Iiterator<T> iterator()
+        {
+            return new IteratorConcreto(this);
+        }
+
+        public void Add(T value)
+        {
+            elements.Add(value);
+        }
+
+        public int Count()
+        {
+            return elements.Count;
+        }
+
+        public T this[int index]
+        {
+            get { return elements[index]; }
+            set { elements[index] = value; }
+        }
+
+
+        private class IteratorConcreto : Iiterator<T>
+        {
+            private List<T> list;
+            private int index = -1;
+
+            public IteratorConcreto(ICollection<T> list)
+            {
+                this.list = list.elements;
+            }
+
+            public T Current()
+            {
+                return list[index];
+            }
+
+            public T First()
+            {
+                return list[0];
+            }
+
+            public bool HasNext()
+            {
+                index++;
+                return index < list.Count;
+            }
         }
     }
 
-    class ContenedorEnum : IEnumerator
-    {
-        private int[] valores;
-        private int posicion = -1;
-
-        public ContenedorEnum(int[] valores)
-        {
-            this.valores = valores;
-        }
-
-        public object Current => valores[posicion];
-
-        public bool MoveNext()
-        {
-            posicion++;
-
-            if (posicion < valores.Length) //logica de pasar al siguiente elemento
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void Reset()
-        {
-            posicion = -1;
-        }
-    }
 }
