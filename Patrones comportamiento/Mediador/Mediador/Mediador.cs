@@ -25,7 +25,10 @@ namespace Mediador
         public void Enviar(string emisor, string mensaje)
         {
             Console.WriteLine("se paso por mediador");
+            if (emisor == "nombre")
+            {
 
+            }
             this.envioMensaje(emisor, mensaje); //todos los metodos referenciados al delegado se van a invocar
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("--- mensajes enviados ---");

@@ -14,7 +14,7 @@ namespace Memento //se usa para salvar el estado interno de un objeto y tomarlo 
         {
             //creamos el originador
             Originador auto = new Originador("nissan", 2010, 10000.51);
-            System.Console.WriteLine(auto.ToString());
+            Console.WriteLine(auto.ToString());
 
             //creamos el caretaker
             CareTaker careTaker = new CareTaker();
@@ -26,10 +26,10 @@ namespace Memento //se usa para salvar el estado interno de un objeto y tomarlo 
             auto.Nombre = "chevrolet";
             auto.Modelo = 1970;
             auto.Costo = 35000;
-            System.Console.WriteLine(auto.ToString());
+            Console.WriteLine(auto.ToString());
 
             auto.Restaurar(careTaker.Memento);
-            System.Console.WriteLine(auto.ToString());
+            Console.WriteLine(auto.ToString());
 
             Console.Read();
         }

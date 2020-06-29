@@ -7,7 +7,6 @@ namespace Observador
     {
         private List<IObservador> observadores = new List<IObservador>();
         private string mensaje;
-
         private int dato;
 
         public void Suscribir(IObservador observador)
@@ -20,7 +19,7 @@ namespace Observador
             observadores.Remove(observador);
         }
 
-        private void Notificar()
+        private void Notificar() //mensaje como param
         {
             foreach (var observador in observadores)
             {

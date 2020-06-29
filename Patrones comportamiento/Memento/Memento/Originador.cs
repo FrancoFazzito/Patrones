@@ -3,7 +3,7 @@
 namespace Memento //se usa para salvar el estado interno de un objeto y tomarlo de manera externa
 {
     [Serializable] //vamos a serializar estos objetos
-    class Originador
+    class Originador //concreto de auto
     {
         private string nombre;
         private int modelo;
@@ -32,7 +32,7 @@ namespace Memento //se usa para salvar el estado interno de un objeto y tomarlo 
             return memento;
         }
 
-        public void Restaurar(Memento memento)
+        public void Restaurar(Memento memento) // abstract
         {
             Originador temp = memento.Restaurar();
 

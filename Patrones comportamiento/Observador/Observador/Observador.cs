@@ -14,13 +14,13 @@ namespace Observador
             sujeto.Suscribir(this);
         }
 
-        public void Update(string mensaje) //modelo push 
+        public void Update(string mensaje) //modelo push - difunsion
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"push: {nombre}-{mensaje}");
         }
 
-        public void UpdatePull()
+        public void UpdatePull() //
         {
             int dato = sujeto.Dato;
             if (dato > 6) //logica cuando vamos a leer o no
