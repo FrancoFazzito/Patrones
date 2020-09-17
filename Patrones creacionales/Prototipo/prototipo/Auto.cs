@@ -2,18 +2,16 @@
 {
     class Auto : IPrototipo //clonar los valores del estado del objeto
     {
-        private string modelo;
-
         public Auto(string modelo)
         {
-            this.modelo = modelo;
+            this.Modelo = modelo;
         }
 
-        public string Modelo { get => modelo; set => modelo = value; }
+        public string Modelo { get; set; }
 
         public object Clonar()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 }

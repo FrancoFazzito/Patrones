@@ -21,15 +21,15 @@ namespace Bridge
             productos.Add("M7", 10000);
 
             
-            Abstraccion abstraccion1 = new Abstraccion(new Implementecion1(), productos);
+            Abstraccion abstraccion1 = new Abstraccion(new Implementacion1(), productos);
             abstraccion1.MostrarTotales();
             Console.WriteLine();
 
-            Abstraccion abstraccion2 = new Abstraccion(new Implementecion2(), productos);
+            Abstraccion abstraccion2 = new Abstraccion(new Implementacion2(), productos);
             abstraccion2.MostrarTotales();
             Console.WriteLine();
 
-            Abstraccion abstraccion3 = new Abstraccion(new Implementecion3(), productos);
+            Abstraccion abstraccion3 = new Abstraccion(new Implementacion3(), productos);
             abstraccion3.MostrarTotales();
             Console.WriteLine();
 
@@ -43,7 +43,7 @@ namespace Bridge
         void ListarProductos(Dictionary<string, double> productos);
     }
 
-    class Abstraccion
+    class Abstraccion //manejador (tambien puede ser abstracta)
     {
         IBridge implementacion;
         Dictionary<string, double> productos;
@@ -54,14 +54,6 @@ namespace Bridge
             this.productos = productos;
         }
 
-        public Abstraccion(int tipo, Dictionary<string, double> productos)
-        {
-            if (tipo == 1)
-            {
-                implementacion = new Implementecion1();
-            }
-            this.productos = productos;
-        }
 
         public void ListarProductos()
         {
@@ -74,7 +66,11 @@ namespace Bridge
         }
     }
 
-    class Implementecion1 : IBridge
+    //abstraccion A -> usa implementacion 1 y agrega algo
+
+    //abstraccion B -> usa implementacion 2 y agrega algo
+
+    class Implementacion1 : IBridge //cuerpo
     {
         public void ListarProductos(Dictionary<string, double> productos)
         {
@@ -94,7 +90,7 @@ namespace Bridge
         }
     }
 
-    class Implementecion2 : IBridge
+    class Implementacion2 : IBridge
     {
         public void ListarProductos(Dictionary<string, double> productos)
         {
@@ -114,7 +110,7 @@ namespace Bridge
         }
     }
 
-    class Implementecion3 : IBridge
+    class Implementacion3 : IBridge
     {
         public void ListarProductos(Dictionary<string, double> productos)
         {

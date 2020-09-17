@@ -5,13 +5,7 @@ namespace prototipo
 {
     class Casa : IPrototipo
     {
-        private string calle;
-
-        public string Calle
-        {
-            get { return calle; }
-            set { calle = value; }
-        }
+        public string Calle { get; set; }
 
 
         public Casa()
@@ -27,7 +21,7 @@ namespace prototipo
 
         public object Clonar()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
 
         public override string ToString()

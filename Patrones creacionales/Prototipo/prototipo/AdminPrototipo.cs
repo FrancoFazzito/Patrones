@@ -22,9 +22,10 @@ namespace prototipo
             prototipos.Add(nombre, prototipo);
         }
 
-        public object obtenerPrototipo(string llave)
+        public IPrototipo this[string llave]
         {
-            return prototipos[llave].Clonar();
+            get => prototipos[llave];
+            set => prototipos[llave] = value;
         }
     }
 }

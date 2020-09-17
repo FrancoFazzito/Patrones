@@ -8,7 +8,7 @@ namespace Flyweight
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) //pasar los atributos compartidos primero y despues los concretos
         {
             List<int> americana = new List<int>(); //guarda los index de los flyweights dentro la lista de factory
             List<int> mexicana = new List<int>();

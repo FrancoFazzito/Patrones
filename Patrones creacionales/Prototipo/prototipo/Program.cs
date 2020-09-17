@@ -11,8 +11,8 @@ namespace prototipo
         {
             AdminPrototipo admin = new AdminPrototipo();
 
-            Persona uno = admin.obtenerPrototipo("persona") as Persona;
-            Persona dos = admin.obtenerPrototipo("persona") as Persona;
+            Persona uno = admin["persona"] as Persona;
+            Persona dos = admin["persona"] as Persona;
 
             Console.WriteLine(uno.Nombre);
             Console.WriteLine(dos.Nombre);
@@ -29,7 +29,7 @@ namespace prototipo
             admin.addPrototipo("nissan", new Auto("nissan sentra"));
 
             Console.WriteLine("--variable valiosa--");
-            Auto auto = admin.obtenerPrototipo("nissan") as Auto;
+            Auto auto = admin["nissan"] as Auto;
 
             Console.WriteLine(auto.Modelo);
 
