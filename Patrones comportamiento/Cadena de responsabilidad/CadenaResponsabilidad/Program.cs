@@ -13,6 +13,8 @@ namespace CadenaResponsabilidad
             Propietario propietario = new Propietario();
             Gerente gerente = new Gerente(propietario);
             Vendedor vendedor = new Vendedor(gerente);
+              
+            //vendedor -> gerente -> propietario
 
             int cantidad = 100;
             double precio = 100.50;

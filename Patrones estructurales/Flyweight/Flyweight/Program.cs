@@ -10,35 +10,82 @@ namespace Flyweight
     {
         static void Main(string[] args) //pasar los atributos compartidos primero y despues los concretos
         {
-            List<int> americana = new List<int>(); //guarda los index de los flyweights dentro la lista de factory
-            List<int> mexicana = new List<int>();
-            List<int> italiana = new List<int>();
-            List<int> argentina = new List<int>();
+            
+            Console.ReadLine();
+        }
+    }
 
-            FlyweightFactory factory = new FlyweightFactory();
+    public class Concesionario
+    {
+        Dictionary<string, IFlyweight> Diccionario = new Dictionary<string, IFlyweight>();
 
-            int index = factory.adicionar("asado");
-            americana.Add(index);
-            mexicana.Add(index);
-            italiana.Add(index);
-
-            index = factory.adicionar("tacos");
-            mexicana.Add(index);
-
-            index = factory.adicionar("frutas");
-            mexicana.Add(index);
-
-            foreach (int indexComida in mexicana)
+        public IFlyweight Vender(string marca, string modelo, string color, string patente, string titular)
+        {
+            string Key = marca + modelo + color;
+            if (!Diccionario.ContainsKey(Key))
             {
-                //calcular costo hace el estado extrinsico
-                //nombre es el estado intrinsico, es decir el valor compartido
-
-                IFlyweight receta = factory[indexComida];
-                receta.CalculaCosto();
-                receta.Mostrar();
+                Diccionario.Add(Key, new Modelo(marca, modelo, color));
             }
 
-            Console.ReadLine();
+            Modelo modeloAuto = (Modelo)Diccionario[Key];
+            return new Auto(modeloAuto, patente, titular);
+        }
+    }
+
+    public class Modelo : IFlyweight
+    {
+        public Modelo(string marca, string anio, string color)
+        {
+            this.Marca = marca;
+            this.Anio = anio;
+            this.Color = color;
+        }
+
+        public string Marca { get; }
+        public string Anio { get; }
+        public string Color { get; }
+
+        public string Describir()
+        {
+            string mensaje = "Marca: " + Marca + Environment.NewLine;
+            mensaje += "Modelo: " + Anio + Environment.NewLine;
+            mensaje += "Color: " + Color + Environment.NewLine;
+            return mensaje;
+        }
+    }
+
+    public interface IFlyweight
+    {
+        string Marca { get; }
+        string Anio { get; }
+        string Color { get; }
+        string Describir();
+    }
+
+    public class Auto : IFlyweight
+    {
+        private Modelo modelo;
+
+        public Auto(Modelo modelo, string patente, string titular)
+        {
+            this.modelo = modelo;
+            this.Patente = patente;
+            this.Titular = titular;
+        }
+
+        public string Marca { get { return modelo.Marca; } }
+
+        public string Anio { get { return modelo.Anio; } }
+
+        public string Color { get { return modelo.Color; } }
+
+        public string Patente { get; }
+
+        public string Titular { get; }
+
+        public string Describir()
+        {
+            return modelo.Describir() + " Dominio: " + this.Patente + " de: " + this.Titular;
         }
     }
 }

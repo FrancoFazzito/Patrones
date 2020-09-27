@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TemplateMethod", "TemplateMethod\TemplateMethod.vbproj", "{57D89FD6-EDFF-4C9F-A94F-8B7B13ADE09B}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BL", "BL\BL.vbproj", "{29602053-18D0-4EB9-8A1E-552CC38A50CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57D89FD6-EDFF-4C9F-A94F-8B7B13ADE09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D89FD6-EDFF-4C9F-A94F-8B7B13ADE09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D89FD6-EDFF-4C9F-A94F-8B7B13ADE09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D89FD6-EDFF-4C9F-A94F-8B7B13ADE09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29602053-18D0-4EB9-8A1E-552CC38A50CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29602053-18D0-4EB9-8A1E-552CC38A50CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29602053-18D0-4EB9-8A1E-552CC38A50CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29602053-18D0-4EB9-8A1E-552CC38A50CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

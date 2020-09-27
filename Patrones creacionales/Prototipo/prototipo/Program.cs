@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,31 +10,89 @@ namespace prototipo
     {
         static void Main(string[] args) //usado cuando cuesta muchos recursos instanciar por constructor
         {
-            AdminPrototipo admin = new AdminPrototipo();
-
-            Persona uno = admin["persona"] as Persona;
-            Persona dos = admin["persona"] as Persona;
-
-            Console.WriteLine(uno.Nombre);
-            Console.WriteLine(dos.Nombre);
-            Console.WriteLine("--modificacion--");
-            //podemos clonar y utlizar todos los estados de persona y cambiar el que nos interesa
-
-            uno.Nombre = "damian";
-            dos.Nombre = "julia";
-
-            Console.WriteLine(uno.Nombre);
-            Console.WriteLine(dos.Nombre);
-
-            //podemos querer una instancia valiosa y clonarla luego
-            admin.addPrototipo("nissan", new Auto("nissan sentra"));
-
-            Console.WriteLine("--variable valiosa--");
-            Auto auto = admin["nissan"] as Auto;
-
-            Console.WriteLine(auto.Modelo);
-
-            Console.ReadLine();
+            
         }
     }
+
+	public class ConcretePrototypeCBO1 : Prototype
+	{
+		//ES UN CONCRETE PROTOTYPE
+		public ConcretePrototypeCBO1()
+		{
+			Carne = TiposCarne.Pollo;
+			Medallones = 1;
+			TiposQueso = TiposQueso.Cheddar;
+			FetasQueso = 1;
+			Salsa = TiposSalsa.Mayonesa;
+			Tomate = false;
+			Nombre = "CBO";
+		}
+	}
+
+	public class ConcretePrototypeCBO2 : Prototype
+	{
+		//ES UN CONCRETE PROTOTYPE
+		public ConcretePrototypeCBO2()
+		{
+			Carne = TiposCarne.Pollo;
+			Medallones = 2;
+			TiposQueso = TiposQueso.Cheddar;
+			FetasQueso = 2;
+			Salsa = TiposSalsa.Ketchup;
+			Tomate = true;
+			Nombre = "CBO";
+		}
+	}
+
+	public class AdminPrototipo
+    {
+		private Dictionary<string, Prototype> prototipos;
+
+        public AdminPrototipo()
+        {
+			prototipos = new Dictionary<string, Prototype>();
+			prototipos.Add("CBO1", new ConcretePrototypeCBO1());
+			prototipos.Add("CBO2", new ConcretePrototypeCBO2());
+		}
+
+        public Prototype this[string key]
+        {
+			get { return prototipos[key]; }
+			set { prototipos[key] = value; }
+        }
+    }
+
+
+	public abstract class Prototype : ICloneable
+	{
+		//PROTYPE
+		protected string Nombre { get; set; }
+		protected TiposCarne Carne { get; set; }
+		protected int Medallones { get; set; }
+		public int FetasQueso { get; set; }
+		protected TiposQueso TiposQueso { get; set; }
+		protected bool Tomate { get; set; }
+		protected TiposSalsa Salsa { get; set; }
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
+
+		public string Descripcion()
+		{
+			string mensaje = "Nombre: " + Nombre +
+				" -Carne: " + Carne +
+				" -Medallones: " + Medallones +
+				" -FetasQueso: " + FetasQueso +
+				" -Tipo de Queso: " + TiposQueso +
+				" -Tipo de Salsa: " + Salsa;
+			mensaje += Environment.NewLine;
+			return mensaje;
+		}
+	}
+
+	public enum TiposCarne { Vacuna, Pollo, Cerdo }
+	public enum TiposQueso { Cheddar, Mozzarella, SinQueso }
+	public enum TiposSalsa { BigMac, Mayonesa, BBQ, Ketchup, Mostaza, SinSalsa }
 }

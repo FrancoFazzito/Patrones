@@ -10,29 +10,67 @@ namespace Visitante
     {             //vamos visitar los obejtos de esa estructura sin alterar sus clases
         static void Main(string[] args)
         {
-            double totalCosto = 0;
-            int totalObjetos = 0;
-            int totalClasifacion = 0;
-
-            Elemento estructuraObjeto =
-                 new Elemento("botiquin", 30,
-                 new Elemento("termomento",50,
-                    new ElementoLeaf(
-                        new Elemento("antibiotico", 40, new Elemento()),
-                        new Elemento("antiacido",40,new Elemento()
-                 ))));
-
-            //visitante que visite todos los objetos
-            Visitante visitante = new Visitante();
-            visitante.ContarElementos(estructuraObjeto);
-
-            totalCosto = visitante.Total;
-            totalClasifacion = visitante.Clasificacion;
-            totalObjetos = visitante.Conteo;
-
-            System.Console.WriteLine($"se tiene {totalCosto} con clasificacion {totalClasifacion} y un total de {totalObjetos}");
-
+            
             Console.Read();
         }
+    }
+
+    public abstract class AbstractVisitor
+    {
+        public abstract string Visitar(AsistenteUAI recibir);
+        public abstract string Visitar(AsistenteExterno recibir);
+        public abstract string Visitar(AsistenteGeneral recibir);
+    }
+
+    public class Recibidor : AbstractVisitor
+    {
+        public override string Visitar(AsistenteUAI recibir)
+        {
+            return recibir.Accept(this);
+        }
+
+        public override string Visitar(AsistenteExterno recibir)
+        {
+            return recibir.Accept(this);
+        }
+
+        public override string Visitar(AsistenteGeneral recibir)
+        {
+            return recibir.Accept(this);
+        }
+    }
+
+    public class AsistenteGeneral : Asistente
+    {
+        public override string Accept(AbstractVisitor visitante)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class AsistenteExterno : Asistente
+    {
+        public override string Accept(AbstractVisitor visitante)
+        {
+            return visitante.Visitar(this);
+        }
+    }
+
+    public class AsistenteUAI : Asistente
+    {
+        public override string Accept(AbstractVisitor visitante)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public abstract class Asistente {
+
+        private string nombre;
+        private string apellido;
+        private string edad;
+
+        public abstract string Accept(AbstractVisitor visitante);
+
     }
 }

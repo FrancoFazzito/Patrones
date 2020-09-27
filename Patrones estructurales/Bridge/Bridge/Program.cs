@@ -43,7 +43,7 @@ namespace Bridge
         void ListarProductos(Dictionary<string, double> productos);
     }
 
-    class Abstraccion //manejador (tambien puede ser abstracta)
+    class Abstraccion : IAbstraccion //manejador (tambien puede ser abstracta)
     {
         IBridge implementacion;
         Dictionary<string, double> productos;
@@ -64,6 +64,35 @@ namespace Bridge
         {
             implementacion.MostrarTotales(productos);
         }
+    }
+
+    class Abstraccion2 : IAbstraccion //manejador (tambien puede ser abstracta)
+    {
+        IBridge implementacion;
+        Dictionary<string, double> productos;
+
+        public Abstraccion2(IBridge implementacion, Dictionary<string, double> productos)
+        {
+            this.implementacion = implementacion;
+            this.productos = productos;
+        }
+
+
+        public void ListarProductos()
+        {
+            implementacion.ListarProductos(productos);
+        }
+
+        public void MostrarTotales()
+        {
+            implementacion.MostrarTotales(productos);
+        }
+    }
+
+    interface IAbstraccion
+    {
+        void MostrarTotales();
+        void ListarProductos();
     }
 
     //abstraccion A -> usa implementacion 1 y agrega algo
