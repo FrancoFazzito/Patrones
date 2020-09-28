@@ -42,13 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auto.cs" />
-    <Compile Include="IComando.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ComandoApagar.cs" />
-    <Compile Include="ComandoApagarAlarma.cs" />
-    <Compile Include="ComandoColocarAlarma.cs" />
-    <Compile Include="ComandoEncender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

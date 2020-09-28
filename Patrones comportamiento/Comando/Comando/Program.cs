@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Comando
 {
-    partial class Program //crea separacion entre quien hace la peticion y quien la lleva a cabo
+    internal partial class Program //crea separacion entre quien hace la peticion y quien la lleva a cabo
     {
-        static void Main(string[] args) //permite hacer UNDO y REDO
+        private static void Main(string[] args) //permite hacer UNDO y REDO
         {
             Auto auto = new Auto();
 
@@ -25,22 +25,116 @@ namespace Comando
         //queremos que diferentes receptores lleven de forma diferente
     }
 
-    class ControlRemoto
+    internal class ControlRemoto
     {
-        private List<IComando> comandos;
+        private readonly List<IComando> comandos;
 
         public ControlRemoto(Auto auto)
         {
-            comandos = new List<IComando>();
-            comandos.Add(new ComandoApagar(auto));
-            comandos.Add(new ComandoEncender(auto));
-            comandos.Add(new ComandoApagarAlarma(auto));
-            comandos.Add(new ComandoColocarAlarma(auto));
+            comandos = new List<IComando>
+            {
+                new ComandoApagar(auto),
+                new ComandoEncender(auto),
+                new ComandoApagarAlarma(auto),
+                new ComandoColocarAlarma(auto)
+            };
         }
 
         public void EjecutarComando(int indexOpcion)
         {
             comandos[indexOpcion].ejecutar();
+        }
+    }
+
+    internal class ComandoApagar : IComando
+    {
+        private readonly Auto auto;
+
+        public ComandoApagar(Auto auto)
+        {
+            this.auto = auto;
+        }
+
+        public void ejecutar()
+        {
+            auto.Apagar();
+        }
+    }
+
+    internal class ComandoApagarAlarma : IComando
+    {
+        private readonly Auto auto;
+
+        public ComandoApagarAlarma(Auto auto)
+        {
+            this.auto = auto;
+        }
+
+        public void ejecutar()
+        {
+            auto.QuitarAlarma();
+        }
+    }
+
+    internal class ComandoColocarAlarma : IComando
+    {
+        private readonly Auto auto;
+
+        public ComandoColocarAlarma(Auto auto)
+        {
+            this.auto = auto;
+        }
+
+        public void ejecutar()
+        {
+            auto.ColocarAlarma();
+        }
+    }
+
+    internal class ComandoEncender : IComando
+    {
+        private readonly Auto auto;
+
+        public ComandoEncender(Auto auto)
+        {
+            this.auto = auto;
+        }
+
+        public void ejecutar()
+        {
+            auto.Encender();
+        }
+    }
+
+    internal interface IComando
+    {
+        void ejecutar();
+    }
+
+    internal class Auto
+    {
+        public void Encender()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("se ha prendido el auto");
+        }
+
+        public void Apagar()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("se ha apagado el auto");
+        }
+
+        public void ColocarAlarma()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("se ha colocado la alarma");
+        }
+
+        public void QuitarAlarma()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("se ha quitado la alarma");
         }
     }
 }

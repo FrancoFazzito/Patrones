@@ -42,11 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caldera.cs" />
-    <Compile Include="EstadoAlarma.cs" />
-    <Compile Include="EstadoCalentando.cs" />
-    <Compile Include="EstadoEspera.cs" />
-    <Compile Include="IEstado.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

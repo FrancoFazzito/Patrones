@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,10 @@ namespace prototipo
     {
         static void Main(string[] args) //usado cuando cuesta muchos recursos instanciar por constructor
         {
-            
+            AdminPrototipo admin = new AdminPrototipo();
+			var hamburguesa = admin["CBO1"];
+			Console.WriteLine(hamburguesa.Descripcion());
+			Console.ReadLine();
         }
     }
 
@@ -40,7 +44,7 @@ namespace prototipo
 			FetasQueso = 2;
 			Salsa = TiposSalsa.Ketchup;
 			Tomate = true;
-			Nombre = "CBO";
+			Nombre = "CBO2";
 		}
 	}
 
@@ -57,7 +61,7 @@ namespace prototipo
 
         public Prototype this[string key]
         {
-			get { return prototipos[key]; }
+			get { return (Prototype)prototipos[key].Clone(); }
 			set { prototipos[key] = value; }
         }
     }
